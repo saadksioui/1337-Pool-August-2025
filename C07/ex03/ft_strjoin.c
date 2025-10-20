@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sksioui <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/31 13:34:54 by sksioui           #+#    #+#             */
-/*   Updated: 2025/08/31 14:07:10 by sksioui          ###   ########.fr       */
+/*   Created: 2025/09/02 12:49:09 by sksioui           #+#    #+#             */
+/*   Updated: 2025/09/02 12:57:54 by sksioui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	size_strs(char **strs, int size)
 	int	total;
 
 	i = 0;
+	total = 0;
 	while (i < size)
 	{
 		total += ft_strlen(strs[i]);
@@ -50,19 +51,11 @@ int	ft_strcp(char *dest, char *src, int index)
 	return (index);
 }
 
-char	*ft_strjoin(int size, char **strs, char *sep)
+void	create_str(char *arr, char **strs, char *sep, int size)
 {
-	int		i;
-	int		j;
-	int		length_strs;
-	int		length_sep;
-	char	*arr;
+	int	i;
+	int	j;
 
-	length_strs = size_strs(strs, size);
-	length_sep = ft_strlen(sep) * (size - 1);
-	arr = malloc(sizeof(char) * (length_strs + length_sep + 1));
-	if (!arr)
-		return (0);
 	i = 0;
 	j = 0;
 	while (i < size)
@@ -73,5 +66,27 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 		i++;
 	}
 	arr[j] = '\0';
+}
+
+char	*ft_strjoin(int size, char **strs, char *sep)
+{
+	int		length_strs;
+	int		length_sep;
+	char	*arr;
+
+	if (size == 0)
+	{
+		arr = malloc(1);
+		if (!arr)
+			return (0);
+		arr[0] = '\0';
+		return (arr);
+	}
+	length_strs = size_strs(strs, size);
+	length_sep = ft_strlen(sep) * (size - 1);
+	arr = malloc(sizeof(char) * (length_strs + length_sep + 1));
+	if (!arr)
+		return (0);
+	create_str(arr, strs, sep, size);
 	return (arr);
 }

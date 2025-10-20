@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sksioui <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/31 13:20:32 by sksioui           #+#    #+#             */
-/*   Updated: 2025/08/31 13:28:13 by sksioui          ###   ########.fr       */
+/*   Created: 2025/09/02 12:47:44 by sksioui           #+#    #+#             */
+/*   Updated: 2025/09/02 13:09:57 by sksioui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	ft_ultimate_range(int **range, int min, int max)
 	}
 	r = malloc(sizeof(int) * size);
 	if (!r)
-		return (0);
+	{
+		*range = NULL;
+		return (-1);
+	}
 	i = 0;
 	while (i < size)
 	{
